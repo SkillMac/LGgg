@@ -4,6 +4,8 @@ cc.Class({
 
     properties: {
         _ctrl: null,
+        _start_touch_position: null,
+        _touch_move_once_flag: false,
     },
 
     pub_init(ctrl) {
@@ -25,24 +27,27 @@ cc.Class({
 
     _touch_start_event(e) {
         let pos = e.getLocation();
-        let touch_type_ = CONFIG.touch_type.none;
-        if(pos.x <= 640) {
-            touch_type_ = CONFIG.touch_type.left_point;
-        } else if(pos.x > 640) {
-            touch_type_ = CONFIG.touch_type.right_point;
-        };
-        this._ctrl.pub_tell_player_touch_type(touch_type_);
+        this._start_touch_position = pos;
     },
 
     _touch_move_event(e) {
-        
+        if(this._touch_move_once_flag) return;
+
+        let touch_type_ = CONFIG.touch_type.none;
+        this._touch_move_once_flag = true;
+        let pos = e.getLocation();
+        let dt_y_val = pos.y - this._start_touch_position.y;
+
+        touch_type_ = dt_y_val > 0 ? CONFIG.touch_type.slider_up : dt_y_val == 0 ? (pos.x <= 640 ? CONFIG.touch_type.left_point : touch_type_ = CONFIG.touch_type.right_point) : CONFIG.touch_type.slider_down;
+
+        this._ctrl.pub_tell_player_touch_type(touch_type_);
     },
 
     _touch_end_event(e) {
-        
+        this._touch_move_once_flag = false;
     },
 
     _touch_cancle_event(e) {
-        
+        this._touch_move_once_flag = false;
     }
 });

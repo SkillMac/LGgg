@@ -20,11 +20,17 @@ cc.Class({
 
     _on_last_frame(action_name, animation_status) {
         switch (animation_status._name) {
-            case CONFIG.hero_animation_name.normal_attck:
+            case CONFIG.hero_animation_name.normal_attack:
                 this._animation.play(CONFIG.hero_animation_name.idle);
                 break;
-            case CONFIG.hero_animation_name.normal_attck1:
+            case CONFIG.hero_animation_name.normal_attack1:
                 this._animation.play(CONFIG.hero_animation_name.idle);
+                break;
+            case CONFIG.hero_animation_name.duck_attack1:
+                this._animation.play(CONFIG.hero_animation_name.duck_idle);
+                break;
+            case CONFIG.hero_animation_name.duck_attack2:
+                this._animation.play(CONFIG.hero_animation_name.duck_idle);
                 break;
             default:
                 break;

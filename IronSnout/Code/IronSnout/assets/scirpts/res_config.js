@@ -10,10 +10,13 @@ let res_config = {
     },
 
     hero_animation_name: {
-        normal_attck: 'normal_attack',
-        normal_attck1: 'normal_attack1',
+        normal_attack: 'normal_attack',
+        normal_attack1: 'normal_attack1',
         idle: 'idle',
         jump_attack: 'jump_attack',
+        duck_idle: 'duck',
+        duck_attack1: 'duck_attack1',
+        duck_attack2: 'duck_attack2',
     },
 
     touch_type: {

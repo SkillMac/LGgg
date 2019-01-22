@@ -41,8 +41,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.7555947540692878,
-      "y": 0.7555947540692878,
+      "x": 0.4722222222222222,
+      "y": 0.4722222222222222,
       "z": 1
     },
     "_quat": {
@@ -375,6 +375,12 @@
       },
       {
         "__uuid__": "db3c83e6-946b-48d7-89cc-964b92fc1f6d"
+      },
+      {
+        "__uuid__": "3d4bc5fb-1e02-4753-bafe-bb91b4022126"
+      },
+      {
+        "__uuid__": "0d00e04d-3896-43e3-8466-ab04167c67d8"
       }
     ],
     "playOnLoad": false,
@@ -429,6 +435,7 @@
     },
     "_enabled": true,
     "_enemity": null,
+    "_duck_attack_type": 0,
     "_id": "eaBymWXmxAL53yrf6fJjlt"
   },
   {
@@ -531,6 +538,8 @@
     },
     "_enabled": true,
     "_ctrl": null,
+    "_start_touch_position": null,
+    "_touch_move_once_flag": false,
     "_id": "2anuLjlYVC9LNqEVCc1e7y"
   },
   {
