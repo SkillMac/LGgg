@@ -19,21 +19,24 @@ cc.Class({
     },
 
     _on_last_frame(action_name, animation_status) {
-        switch (animation_status._name) {
-            case CONFIG.hero_animation_name.normal_attack:
-                this._animation.play(CONFIG.hero_animation_name.idle);
-                break;
-            case CONFIG.hero_animation_name.normal_attack1:
-                this._animation.play(CONFIG.hero_animation_name.idle);
-                break;
-            case CONFIG.hero_animation_name.duck_attack1:
-                this._animation.play(CONFIG.hero_animation_name.duck_idle);
-                break;
-            case CONFIG.hero_animation_name.duck_attack2:
-                this._animation.play(CONFIG.hero_animation_name.duck_idle);
-                break;
-            default:
-                break;
+        let anima_name = animation_status._name;
+        if(
+            anima_name == CONFIG.hero_animation_name.normal_attack  ||
+            anima_name == CONFIG.hero_animation_name.normal_attack1 ||
+            anima_name == CONFIG.hero_animation_name.duck_2_normal  ||
+            anima_name == CONFIG.hero_animation_name.jump_attack    ||
+            anima_name == CONFIG.hero_animation_name.d_jump_attack  ||
+            anima_name == CONFIG.hero_animation_name.down
+            ) {
+            // play idle animation
+            this._animation.play(CONFIG.hero_animation_name.idle);
+        } else if (
+            anima_name == CONFIG.hero_animation_name.duck_attack1 ||
+            anima_name == CONFIG.hero_animation_name.duck_attack2
+            ) {
+            
+            // play dank animation
+            this._animation.play(CONFIG.hero_animation_name.duck_idle);
         }
     },
 

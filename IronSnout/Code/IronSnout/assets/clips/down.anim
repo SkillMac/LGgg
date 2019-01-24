@@ -1,11 +1,11 @@
 {
   "__type__": "cc.AnimationClip",
-  "_name": "duck_attack2",
+  "_name": "down",
   "_objFlags": 0,
   "_native": "",
-  "_duration": 0.18333333333333332,
+  "_duration": 0.1,
   "sample": 60,
-  "speed": 0.9,
+  "speed": 0.4,
   "wrapMode": 1,
   "curveData": {
     "comps": {
@@ -14,19 +14,13 @@
           {
             "frame": 0,
             "value": {
-              "__uuid__": "3f97ffee-e315-4e8a-a1e8-c66252b5b0e0"
+              "__uuid__": "76510773-ce08-456e-9720-bc37d94c86f4"
             }
           },
           {
             "frame": 0.08333333333333333,
             "value": {
-              "__uuid__": "da0350c5-280c-4158-9ca1-c0286f4160ed"
-            }
-          },
-          {
-            "frame": 0.16666666666666666,
-            "value": {
-              "__uuid__": "4728750f-b54d-433f-9545-78afbdb2e4c9"
+              "__uuid__": "76510773-ce08-456e-9720-bc37d94c86f4"
             }
           }
         ]
