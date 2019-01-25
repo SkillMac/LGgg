@@ -20,6 +20,7 @@ cc.Class({
 
     _on_last_frame(action_name, animation_status) {
         let anima_name = animation_status._name;
+        // LOG.log(anima_name);
         if(
             anima_name == CONFIG.hero_animation_name.normal_attack  ||
             anima_name == CONFIG.hero_animation_name.normal_attack1 ||

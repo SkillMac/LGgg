@@ -5,20 +5,21 @@ cc.Class({
     properties: {
         _ctrl: null,
         _start_touch_position: null,
-        _touch_move_once_flag: false,
+        _current_touch_type: null,
     },
 
     pub_init(ctrl) {
-        this._initData(ctrl);
-        this._bindTouchEvent();
+        this._init_data(ctrl);
+        this._bind_touch_event();
         return this;
     },
 
-    _initData(ctrl) {
+    _init_data(ctrl) {
         this._ctrl = ctrl;
+        this._current_touch_type = CONFIG.touch_type.none;
     },
 
-    _bindTouchEvent() {
+    _bind_touch_event() {
         if(cc.sys.isBrowser) {
             cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this._on_key_down, this);
             cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this._on_key_up, this);
@@ -63,46 +64,52 @@ cc.Class({
         }
     },
 
+    _delay_response_touch() {
+        LOG.log('操作类型 => ', CONFIG.touch_type_msg[this._current_touch_type]);
+        this._ctrl.pub_tell_player_touch_type(this._current_touch_type);
+    },
+
     _touch_start_event(e) {
         let pos = e.getLocation();
         this._start_touch_position = pos;
 
         let touch_type_ = pos.x <= 640 ? CONFIG.touch_type.left_point : CONFIG.touch_type.right_point;
-        this._ctrl.pub_tell_player_touch_type(touch_type_);
+        this._current_touch_type = touch_type_;
+
+        this.node.stopAllActions();
+        this.node.runAction(cc.sequence(cc.delayTime(0.05),cc.callFunc(this._delay_response_touch,this)));
     },
 
     _touch_move_event(e) {
-        if(this._touch_move_once_flag) return;
-
         let touch_type_ = CONFIG.touch_type.none;
-        this._touch_move_once_flag = true;
         let pos = e.getLocation();
         let dt_y_val = pos.y - this._start_touch_position.y;
 
-        // touch_type_ = dt_y_val > 0 ? CONFIG.touch_type.slider_up : dt_y_val == 0 ? (pos.x <= 640 ? CONFIG.touch_type.left_point : touch_type_ = CONFIG.touch_type.right_point) : CONFIG.touch_type.slider_down;
-
-        if(dt_y_val > 2) {
+        if(dt_y_val > 5) {
             if(pos.x <= 640) {
                 touch_type_ = CONFIG.touch_type.slider_up_left;
             } else {
                 touch_type_ = CONFIG.touch_type.slider_up_right;
             }
-        } else if(dt_y_val < -2) {
+        } else if(dt_y_val < -5) {
             if(pos.x <= 640) {
                 touch_type_ = CONFIG.touch_type.slider_down_left;
             } else {
                 touch_type_ = CONFIG.touch_type.slider_down_right;
             }
+        } else {
+            if(pos.x <= 640) {
+                touch_type_ = CONFIG.touch_type.left_point;
+            } else {
+                touch_type_ = CONFIG.touch_type.right_point;
+            }
         }
-
-        this._ctrl.pub_tell_player_touch_type(touch_type_);
+        this._current_touch_type = touch_type_;
     },
 
     _touch_end_event(e) {
-        this._touch_move_once_flag = false;
     },
 
     _touch_cancle_event(e) {
-        this._touch_move_once_flag = false;
     }
 });

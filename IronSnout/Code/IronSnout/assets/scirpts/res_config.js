@@ -48,6 +48,18 @@ let res_config = {
         slider_down_right: '7',
         slider_down_left: '8',
     },
+
+    touch_type_msg: {
+        '-1': '无',
+        '1': '左点',
+        '2': '右点',
+        '3': '上滑',
+        '4': '下滑',
+        '5': '上右',
+        '6': '上左',
+        '7': '下右',
+        '8': '下左'
+    }
 };
 
 module.exports = res_config;

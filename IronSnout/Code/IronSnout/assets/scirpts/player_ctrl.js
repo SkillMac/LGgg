@@ -95,7 +95,7 @@ cc.Class({
         if(this._is_double_jump_flag) return;
         if(this._role_style == _role_style.duck) {
             // deal duck => stand
-            this._play_small_jump_effect();
+            this._play_jump_effect();
         } else if(this._role_style == _role_style.vacate) {
             // double jump
             this._is_double_jump_flag = true;

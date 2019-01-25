@@ -5,7 +5,7 @@ cc.Class({
     properties : {
         hero: cc.Node,
         touch_node: cc.Node,
-
+        log: cc.Label,
 
         _hero: null,
         _touch: null,
@@ -13,16 +13,24 @@ cc.Class({
 
     onLoad () {
         this._register_global_variable();
-        this._initData();
+        this._init_data();
+        this._init_log();
     },
 
-    _initData() {
+    _init_data() {
         this._hero = this.hero.getComponent('player_ctrl').pub_init(this);
         this._touch = this.touch_node.getComponent('touch_ctrl').pub_init(this);
     },
 
     _register_global_variable() {
         window.CONFIG = res_config;
+        window.LOG = this.log;
+    },
+
+    _init_log() {
+        window.LOG.log = function () {
+            window.LOG.string = [...arguments].join('');
+        }
     },
 
     pub_tell_player_touch_type( type ) {
